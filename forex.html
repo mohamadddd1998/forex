@@ -1,0 +1,113 @@
+<html lang="en" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    @font-face {
+      font-family: "Vazir";
+      src: url("fonts-vazir/Vazir.ttf") format("truetype");
+      src: url("fonts-vazir/Vazir.eot") format("eot");
+      src: url("fonts-vazir/Vazir.woff") format("woff");
+      src: url("fonts-vazir/Vazir.woff2") format("woff2");
+    }
+    html {
+      box-sizing: border-box;
+    }
+
+    *,
+    *:before,
+    *:after {
+      box-sizing: inherit;
+    }
+    body {
+      font-family: "Vazir", وTahoma;
+      font-size: 13px;
+      background: #fafafa;
+    }
+    .forex {
+      width: 50%;
+      margin: 10px auto;
+      background-color: #f1f1f1;
+      border: 1px solid gray;
+      padding: 10px;
+      text-align: center;
+    }
+    form label,
+    form input {
+      margin: 10px 0px;
+    }
+    form input {
+      outline: transparent;
+      border: 1px solid gray;
+      padding: 10px;
+    }
+    form input[type="submit"] {
+      background-color: greenyellow;
+      font-weight: bold;
+      border: transparent;
+      cursor: pointer;
+      padding: 10px 15px;
+      font-family: "Vazir";
+    }
+    form input::placeholder {
+      font-family: "Vazir";
+    }
+    #volume {
+      background-color: goldenrod;
+      padding: 10px 20px;
+      display: inline-block;
+    }
+    @media screen and (max-width: 800px) {
+      .forex {
+        width: 80%;
+      }
+    }
+  </style>
+  <body>
+    <section>
+      <div class="forex">
+        <h1>محاسبه ی حجم ورود به معامله</h1>
+        <form onsubmit="claculate(event)">
+          <label for="pip-SL">میزان استاپ بر حسب پیپ : </label><br />
+          <input
+            type="number"
+            id="pip-SL"
+            name="pip-SL"
+            min="0"
+            placeholder="میزان پیپ ضرر"
+            required
+            oninvalid="this.setCustomValidity('یزید عدد را وارد کن !!!')"
+            oninput="this.setCustomValidity('')"
+          /><br />
+          <label for="balance">بالانس : </label><br />
+          <input
+            type="number"
+            id="balance"
+            name="balance"
+            min="0"
+            placeholder="بالانس"
+            required
+            oninvalid="this.setCustomValidity('یزید عدد را وارد کن !!!')"
+            oninput="this.setCustomValidity('')"
+          /><br /><br />
+          <input type="submit" value="محاسبه" />
+        </form>
+        <div class="result">
+          <h1>حجم ورود به معامله :</h1>
+          <h4 id="volume">?</h4>
+        </div>
+      </div>
+    </section>
+    <script>
+      const slInput = document.getElementById("pip-SL")
+      const balanceInput = document.getElementById("balance")
+      const volume = document.getElementById("volume")
+      const claculate = (event) => {
+        event.preventDefault()
+        volume.innerHTML = balanceInput.value / (slInput.value * 1000)
+      }
+    </script>
+  </body>
+</html>

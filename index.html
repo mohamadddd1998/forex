@@ -69,8 +69,18 @@
     <section>
       <div class="forex">
         <h1>محاسبه ی حجم ورود به معامله</h1>
-        <p>(ریسک 0.3 درصد برای هر معامله)</p>
         <form onsubmit="claculate(event)">
+          <label for="percent-SL">میزان ریسک هر معامله بر حسب درصد : </label><br />
+          <input
+            type="number"
+            id="percent-SL"
+            name="percent-SL"
+            min="0"
+            placeholder="میزان ریسک"
+            required
+            oninvalid="this.setCustomValidity('یزید عدد را وارد کن !!!')"
+            oninput="this.setCustomValidity('')"
+          /><br />
           <label for="pip-SL">میزان استاپ بر حسب پیپ : </label><br />
           <input
             type="number"
@@ -104,10 +114,11 @@
     <script>
       const slInput = document.getElementById("pip-SL")
       const balanceInput = document.getElementById("balance")
+      const percentInput = document.getElementById("percent-SL")
       const volume = document.getElementById("volume")
       const claculate = (event) => {
         event.preventDefault()
-        volume.innerHTML = (3 * balanceInput.value) / (slInput.value * 10000)
+        volume.innerHTML = (percentInput.value * balanceInput.value) / (slInput.value * 1000)
       }
     </script>
   </body>
